@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from './Navbar';
 import Map from './Map';
 import AirQualityScale from './AirQualityScale';
-import AQIComponent from './AQIComponent';
 import AirQualityComponent from './AirQualityComponent';
 
 export default function Home() {
@@ -46,9 +45,6 @@ export default function Home() {
           <AirQualityScale /> {/* Air Quality Scale appears after the map */}
         </div>
         <div style={styles.contentContainer}>
-          <div style={styles.leftPanel}>
-            <AQIComponent /> {/* This will display AQIComponent */}
-          </div>
           <div style={styles.rightPanel}>
             <AirQualityComponent />  {/* This will display AirQualityComponent */}
           </div>

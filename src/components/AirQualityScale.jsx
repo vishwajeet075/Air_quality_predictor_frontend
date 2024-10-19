@@ -1,8 +1,6 @@
 import React from 'react';
-
-
-// Importing images
-import goodImage from '../assets/images/good.webp'
+import AQIComponent from './AQIComponent'; // Assuming you have AQIComponent
+import goodImage from '../assets/images/good.webp';
 import moderateImage from '../assets/images/moderate.webp';
 import poorImage from '../assets/images/poor.webp';
 import severeImage from '../assets/images/sever.webp';
@@ -96,4 +94,35 @@ const AirQualityScale = () => {
   );
 };
 
-export default AirQualityScale;
+const MainPage = () => {
+  const mainContainerStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '20px',
+  };
+
+  const leftSideStyles = {
+    flex: '1',
+    marginRight: '20px',
+  };
+
+  const rightSideStyles = {
+    flex: '1',
+  };
+
+  return (
+    <div style={mainContainerStyles}>
+      {/* Left Side - AirQualityScale */}
+      <div style={leftSideStyles}>
+        <AirQualityScale />
+      </div>
+
+      {/* Right Side - AQIComponent */}
+      <div style={rightSideStyles}>
+        <AQIComponent />
+      </div>
+    </div>
+  );
+};
+
+export default MainPage;
