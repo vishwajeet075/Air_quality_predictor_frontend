@@ -1,19 +1,59 @@
-import React from 'react'
-
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import NavBar from './Navbar';
+import Map from './Map';
+import AirQualityScale from './AirQualityScale';
+import AQIComponent from './AQIComponent';
+import AirQualityComponent from './AirQualityComponent';
 
 export default function Home() {
-       const navigate = useNavigate();
-  return (
-   <>
-    <div className="container mx-auto mt-10 text-center">
-    <h1 className="text-4xl font-bold mb-4">Air Quality Predictor</h1>
-    <p className="mb-4">Welcome to the Air Quality Predictor application.</p>
 
-    <button onClick={()=>navigate('/predict')} style={{backgroundColor:'blue' , borderRadius : '10px' , color : 'white', padding : '10px 15px ' , border :'1px solid blue'}}>Predict the aqi</button>
-    <button onClick={()=>navigate('/visualize')} style={{backgroundColor:'blue' , borderRadius : '10px' , color : 'white' , marginLeft:'30px' ,  padding : '10px 15px ' ,border : '1px solid blue'}}>Visualize the data</button>
-  
-  </div>
-   </>
-  )
+  const styles = {
+    pageContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+    },
+    mapContainer: {
+      height: '90vh', // 90% of viewport height
+      width: '100%',
+      position: 'relative',
+      zIndex: 1, // Ensures the map is on top of other elements
+    },
+    contentContainer: {
+      padding: '20px',
+      backgroundColor: '#f8f8f8', // Light background for the air quality scale section
+      zIndex: 2,
+      display: 'flex', // This makes the content display side by side
+      justifyContent: 'space-between', // Add space between the two components
+    },
+    leftPanel: {
+      flex: 1, // This makes the left panel take up equal space
+      marginRight: '10px', // Adds some spacing between the panels
+    },
+    rightPanel: {
+      flex: 1, // This makes the right panel take up equal space
+    },
+  };
+
+  return (
+    <>
+      <NavBar />
+      <div style={styles.pageContainer}>
+        <div style={styles.mapContainer}>
+          <Map />
+        </div>
+        <div style={styles.contentContainer}>
+          <AirQualityScale /> {/* Air Quality Scale appears after the map */}
+        </div>
+        <div style={styles.contentContainer}>
+          <div style={styles.leftPanel}>
+            <AQIComponent /> {/* This will display AQIComponent */}
+          </div>
+          <div style={styles.rightPanel}>
+            <AirQualityComponent />  {/* This will display AirQualityComponent */}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
