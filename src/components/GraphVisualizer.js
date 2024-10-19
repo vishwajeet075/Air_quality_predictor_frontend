@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from './Navbar';
+import AirQualityService from './AirQualityService';
 import { 
   Box, 
   Paper, 
@@ -196,7 +197,9 @@ const UpdatedGraphVisualizer = () => {
           </Paper>
         </motion.div>
       </Box>
+      <AirQualityService /> 
     </ThemeProvider>
+    
   );
 };
 

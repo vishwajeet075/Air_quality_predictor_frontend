@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import wearMask from '../assets/images/wear.png';
 import stayIndoor from '../assets/images/Indoors.png';
 import windowsOpen from '../assets/images/Openings.png';
 import purifier from '../assets/images/purifier.png';
 import familyOutdoor from '../assets/images/family.png';
 
-export default function AirQualityComponent() {
-  
-  const [view, setView] = useState('city'); // State to toggle between city and country ranking
+// Import the new RankingsComponent
+import RankingsComponent from './RankingsComponent';
 
+export default function AirQualityComponent() {
   const styles = {
     container: {
       display: 'grid',
@@ -54,30 +54,6 @@ export default function AirQualityComponent() {
       fontWeight: 'bold',
       color: '#43a047',
     },
-    rankingsHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '20px',
-    },
-    rankingButton: {
-      padding: '10px',
-      cursor: 'pointer',
-      border: 'none',
-      borderRadius: '4px',
-      backgroundColor: '#007bff',
-      color: 'white',
-    },
-    rankingList: {
-      listStyleType: 'none',
-      padding: 0,
-    },
-    rankingItem: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '10px 0',
-      borderBottom: '1px solid #ddd',
-    },
     healthIcons: {
       display: 'flex',
       justifyContent: 'space-around',
@@ -97,45 +73,11 @@ export default function AirQualityComponent() {
     },
   };
 
-  // Sample dynamic data for rankings
-  const cityRankings = [
-    { rank: 1, location: 'Mumbai', aqi: 43, flag: '🇮🇳' },
-    { rank: 2, location: 'Berlin', aqi: 50, flag: '🇩🇪' },
-    { rank: 3, location: 'New York', aqi: 60, flag: '🇺🇸' },
-  ];
-
-  const countryRankings = [
-    { rank: 1, location: 'Germany', aqi: 45, flag: '🇩🇪' },
-    { rank: 2, location: 'India', aqi: 70, flag: '🇮🇳' },
-    { rank: 3, location: 'USA', aqi: 65, flag: '🇺🇸' },
-  ];
-
   return (
     <div style={styles.container}>
-      {/* Left Panel - Dynamic Ranking */}
+      {/* Left Panel - Dynamic Ranking (using RankingsComponent) */}
       <div style={styles.leftPanel}>
-        <div style={styles.rankingsHeader}>
-          <button
-            style={styles.rankingButton}
-            onClick={() => setView('city')}
-          >
-            City Rankings
-          </button>
-          <button
-            style={styles.rankingButton}
-            onClick={() => setView('country')}
-          >
-            Country Rankings
-          </button>
-        </div>
-        <ul style={styles.rankingList}>
-          {(view === 'city' ? cityRankings : countryRankings).map((item, index) => (
-            <li key={index} style={styles.rankingItem}>
-              <span>{item.rank}. {item.flag} {item.location}</span>
-              <span>{item.aqi}</span>
-            </li>
-          ))}
-        </ul>
+        <RankingsComponent />
       </div>
 
       {/* Right Panel - AQI Info */}
