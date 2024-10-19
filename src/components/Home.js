@@ -5,6 +5,7 @@ import AirQualityScale from './AirQualityScale';
 import AQIComponent from './AQIComponent';
 import AirQualityComponent from './AirQualityComponent';
 
+
 export default function Home() {
 
   const styles = {
