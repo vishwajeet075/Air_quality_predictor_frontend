@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import NavBar from './Navbar';
 import { 
   TextField, 
   Button, 
@@ -69,6 +70,7 @@ const PredictionForm = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <NavBar />
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', bgcolor: '#f0f4f8' }}>
         <Paper elevation={3} sx={{ p: 4, width: '100%', maxWidth: 600 }}>
           <Typography variant="h4" gutterBottom component="div" sx={{ mb: 4, color: theme.palette.primary.main }}>

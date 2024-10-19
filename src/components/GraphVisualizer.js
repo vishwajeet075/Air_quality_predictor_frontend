@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from './Navbar';
 import { 
   Box, 
   Paper, 
@@ -90,7 +91,9 @@ const UpdatedGraphVisualizer = () => {
   };
 
   return (
+    
     <ThemeProvider theme={theme}>
+       <NavBar />
       <Box
         sx={{
           minHeight: '100vh',
