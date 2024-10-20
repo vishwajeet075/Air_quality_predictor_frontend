@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHome, FaChartLine, FaSearch, FaTv } from 'react-icons/fa'; // Importing FontAwesome icons
+import { FaHome, FaChartLine, FaSearch, FaTv } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
@@ -7,11 +7,11 @@ const NavBar = () => {
   const navigate = useNavigate();
   const styles = {
     navbar: {
-      position: 'fixed',   // Navbar is fixed at the top
-      top: 0,              // Stick to the top
+      position: 'fixed',  
+      top: 0,              
       left: 0,
       right: 0,
-      zIndex: 1000,        // Ensure it stays above other content
+      zIndex: 1000,        
       width: '100%',
       background: 'linear-gradient(90deg, #0052D4 0%, #65C7F7 50%, #9CECFB 100%)',
       boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
@@ -65,12 +65,12 @@ const NavBar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" style={styles.navItem}>
-            <button className="nav-link" onClick={()=>navigate('/visualize')} style={styles.navLink}>
-              <FaHome style={styles.icon} /> visualize
+            <button className="nav-link" onClick={()=>navigate('/')} style={styles.navLink}>
+              <FaHome style={styles.icon} /> Home
             </button>
           </li>
           <li className="nav-item" style={styles.navItem}>
-            <button className="nav-link" onClick={()=>navigate('/')} style={styles.navLink}>
+            <button className="nav-link" onClick={()=>navigate('/visualize')} style={styles.navLink}>
               <FaChartLine style={styles.icon} /> AQI Data
             </button>
           </li>
