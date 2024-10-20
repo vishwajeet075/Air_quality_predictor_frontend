@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import NavBar from './Navbar';
+import AirQualityService from './AirQualityService';
 import { 
   TextField, 
   Button, 
@@ -137,6 +138,8 @@ const PredictionForm = () => {
           </Snackbar>
         </Paper>
       </Box>
+      
+      <AirQualityService /> 
     </ThemeProvider>
   );
 };

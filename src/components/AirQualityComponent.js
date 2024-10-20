@@ -1,21 +1,40 @@
 import React from 'react';
+import wearMask from '../assets/images/wear.png';
+import stayIndoor from '../assets/images/Indoors.png';
+import windowsOpen from '../assets/images/Openings.png';
+import purifier from '../assets/images/purifier.png';
+import familyOutdoor from '../assets/images/family.png';
+
+// Import the new RankingsComponent
+import RankingsComponent from './RankingsComponent';
 
 export default function AirQualityComponent() {
-  
   const styles = {
     container: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',  // Two-column layout
+      gap: '20px',
       fontFamily: 'Arial, sans-serif',
+      width: '90%',
+      margin: '20px auto',
+    },
+    leftPanel: {
       backgroundColor: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
-      width: '90%',
-      margin: '20px auto',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    },
+    rightPanel: {
+      backgroundColor: '#f9f9f9',
+      padding: '20px',
+      borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     },
     header: {
       fontWeight: 'bold',
       fontSize: '1.5em',
       marginBottom: '10px',
+      textAlign: 'center',
     },
     subHeader: {
       fontSize: '1.2em',
@@ -30,13 +49,15 @@ export default function AirQualityComponent() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '10px 0',
+      margin: '10px auto',  // Center AQI circle
       fontSize: '2em',
       fontWeight: 'bold',
       color: '#43a047',
     },
-    healthAdvice: {
-      margin: '20px 0',
+    healthIcons: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      marginTop: '20px',
     },
     weatherForecast: {
       display: 'flex',
@@ -44,90 +65,55 @@ export default function AirQualityComponent() {
       marginTop: '20px',
     },
     weatherCard: {
-      flex: '1',
+      textAlign: 'center',
       padding: '10px',
       backgroundColor: '#fff',
       borderRadius: '8px',
-      textAlign: 'center',
-      margin: '0 5px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     },
-    weatherIcon: {
-      fontSize: '2em',
-      marginBottom: '5px',
-    },
-    healthIcons: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      marginTop: '10px',
-    },
-    healthIconItem: {
-      textAlign: 'center',
-    },
-    healthIconImage: {
-      width: '30px',
-      height: '30px',
-      marginBottom: '5px',
-    }
   };
 
   return (
     <div style={styles.container}>
-      {/* Location and AQI Info */}
-      <div style={styles.header}>
-        Hinjewadi Infotech Park Real-time Air Quality Index (AQI) <span style={styles.subHeader}>Live</span>
-      </div>
-      <p>Current air pollution level and weather condition of your location with the aggregate levels of major air pollutants in the ambient air.</p>
-      
-      <div style={styles.aqiCircle}>
-        43
-      </div>
-      <div>
-        <strong>GOOD</strong>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
-        <div style={{ marginRight: '10px', fontSize: '2em' }}>26°C</div>
-        <div>Patchy rain nearby<br /><small>Local Time: 12:38 | 2024-10-18</small></div>
-      </div>
-      
-      {/* Health Advice */}
-      <div style={styles.healthAdvice}>
-        <h3>Health Advice</h3>
-        <p>How to protect yourself from air pollution around Hinjewadi Infotech Park?</p>
-        <div style={styles.healthIcons}>
-          <div style={styles.healthIconItem}>
-            <img src="/path-to-icon/wear-mask.png" alt="Wear Mask" style={styles.healthIconImage} />
-            <p>Wear Mask<br /><small>Not Required</small></p>
-          </div>
-          <div style={styles.healthIconItem}>
-            <img src="/path-to-icon/stay-indoor.png" alt="Stay Indoor" style={styles.healthIconImage} />
-            <p>Stay Indoor<br /><small>Not Required</small></p>
-          </div>
-          <div style={styles.healthIconItem}>
-            <img src="/path-to-icon/windows-open.png" alt="Keep Windows Open" style={styles.healthIconImage} />
-            <p>Windows<br /><small>Keep Open</small></p>
-          </div>
-          <div style={styles.healthIconItem}>
-            <img src="/path-to-icon/purifier.png" alt="Use Purifier" style={styles.healthIconImage} />
-            <p>Use Purifier<br /><small>Not Required</small></p>
-          </div>
-          <div style={styles.healthIconItem}>
-            <img src="/path-to-icon/family-outdoor.png" alt="Family Outdoor" style={styles.healthIconImage} />
-            <p>Family<br /><small>Allow Outdoor</small></p>
-          </div>
-        </div>
+      {/* Left Panel - Dynamic Ranking (using RankingsComponent) */}
+      <div style={styles.leftPanel}>
+        <RankingsComponent />
       </div>
 
-      {/* Weather Forecast */}
-      <div style={styles.weatherForecast}>
-        {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, index) => (
-          <div key={index} style={styles.weatherCard}>
-            <div style={styles.weatherIcon}>🌧️</div>
-            <div>{day}</div>
-            <div>Moderate rain</div>
-            <div>26°C | 76%</div>
-          </div>
-        ))}
+      {/* Right Panel - AQI Info */}
+      <div style={styles.rightPanel}>
+        <div style={styles.header}>
+          Hinjewadi Infotech Park Real-time Air Quality Index (AQI) <span style={styles.subHeader}>Live</span>
+        </div>
+        <p>Current air pollution level and weather condition of your location with the aggregate levels of major air pollutants in the ambient air.</p>
+        <div style={styles.aqiCircle}>43</div>
+        <div style={{ textAlign: 'center' }}><strong>GOOD</strong></div>
+        <div style={{ textAlign: 'center', margin: '10px 0' }}>
+          <div style={{ fontSize: '2em' }}>26°C</div>
+          <div>Mist<br /><small>Local Time: 12:38 | 2024-10-19</small></div>
+        </div>
+
+        {/* Health Advice */}
+        <h3>Health Advice</h3>
+        <div style={styles.healthIcons}>
+          <div><img src={wearMask} alt="Wear Mask" /><p>Wear Mask<br /><small>Not Required</small></p></div>
+          <div><img src={stayIndoor} alt="Stay Indoor" /><p>Stay Indoor<br /><small>Not Required</small></p></div>
+          <div><img src={windowsOpen} alt="Keep Windows Open" /><p>Windows<br /><small>Keep Open</small></p></div>
+          <div><img src={purifier} alt="Use Purifier" /><p>Use Purifier<br /><small>Not Required</small></p></div>
+          <div><img src={familyOutdoor} alt="Family Outdoor" /><p>Family<br /><small>Allow Outdoor</small></p></div>
+        </div>
+
+        {/* Weather Forecast */}
+        <div style={styles.weatherForecast}>
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+            <div key={index} style={styles.weatherCard}>
+              <div>🌧️</div>
+              <div>{day}</div>
+              <div>Moderate rain</div>
+              <div>26°C | 76%</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,10 @@
 import React from 'react';
-
-
-// Importing images
-import goodImage from '../assets/images/good.webp'
+import goodImage from '../assets/images/good.webp';
 import moderateImage from '../assets/images/moderate.webp';
 import poorImage from '../assets/images/poor.webp';
 import severeImage from '../assets/images/sever.webp';
 import unhealthyImage from '../assets/images/unhelathy.webp';
-import unhealthyyImage from '../assets/images/unhealtyy.webp'; // Double 'y' for consistency with your naming
+import unhealthyyImage from '../assets/images/unhealtyy.webp';
 
 const AirQualityScale = () => {
   const categories = [
@@ -24,7 +21,8 @@ const AirQualityScale = () => {
       textAlign: 'center',
       margin: '20px auto',
       padding: '20px',
-      maxWidth: '900px',
+      maxWidth: '1200px',
+      backgroundColor: '#f8f8f8',
     },
     heading: {
       fontSize: '24px',
@@ -35,24 +33,23 @@ const AirQualityScale = () => {
       color: '#777',
       marginBottom: '20px',
     },
-    scale: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
+    scaleGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)', // Fixed two columns
+      gap: '20px',
     },
-    category: {
+    categoryCard: {
       display: 'flex',
       alignItems: 'center',
-      width: '48%', // Two columns
-      backgroundColor: '#f9f9f9',
-      margin: '10px 0',
-      borderRadius: '8px',
-      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-      padding: '10px',
+      backgroundColor: '#fff',
+      borderRadius: '12px',
+      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+      padding: '20px',
+      borderLeft: `8px solid`, // Border color will change based on AQI category
     },
     icon: {
-      width: '50px',
-      height: '50px',
+      width: '60px',
+      height: '60px',
       marginRight: '20px',
     },
     info: {
@@ -60,7 +57,6 @@ const AirQualityScale = () => {
     },
     categoryLabel: {
       fontSize: '18px',
-      margin: '0',
       fontWeight: 'bold',
     },
     range: {
@@ -80,9 +76,12 @@ const AirQualityScale = () => {
       <h2 style={styles.heading}>Air Quality Index Scale</h2>
       <p style={styles.subHeading}>Know about the category of air quality index (AQI) your ambient air falls in and what it implies.</p>
 
-      <div style={styles.scale}>
+      <div style={styles.scaleGrid}>
         {categories.map((category, index) => (
-          <div key={index} style={{ ...styles.category, borderLeft: `5px solid ${category.color}` }}>
+          <div
+            key={index}
+            style={{ ...styles.categoryCard, borderLeftColor: category.color }}
+          >
             <img src={category.img} alt={category.label} style={styles.icon} />
             <div style={styles.info}>
               <h3 style={styles.categoryLabel}>{category.label}</h3>
@@ -93,6 +92,7 @@ const AirQualityScale = () => {
         ))}
       </div>
     </div>
+    
   );
 };
 
