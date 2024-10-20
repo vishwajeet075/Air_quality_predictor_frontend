@@ -25,6 +25,7 @@ const AirQualityDashboard = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
   };
 
+  // Responsive and professional styles
   const styles = {
     container: {
       display: 'flex',
@@ -32,7 +33,7 @@ const AirQualityDashboard = () => {
       justifyContent: 'center',
       backgroundColor: '#f0f8ff',
       padding: '20px',
-      flexDirection: 'row', // Changed to row for side-by-side layout
+      flexDirection: 'row', // Default for larger screens
     },
     contentWrapper: {
       display: 'flex',
@@ -40,6 +41,7 @@ const AirQualityDashboard = () => {
       justifyContent: 'space-between',
       width: '100%',
       maxWidth: '1200px',
+      flexDirection: 'row',
     },
     imageContent: {
       display: 'flex',
@@ -49,7 +51,7 @@ const AirQualityDashboard = () => {
       width: '50%',
     },
     image: {
-      maxWidth: '400px',
+      maxWidth: '100%', // Ensure image scales for mobile
       height: 'auto',
       border: '1px solid #ccc',
       borderRadius: '10px',
@@ -92,6 +94,31 @@ const AirQualityDashboard = () => {
       fontSize: '24px',
       cursor: 'pointer',
       margin: '0 10px',
+    },
+    // Media queries for responsiveness
+    '@media (max-width: 768px)': {
+      container: {
+        flexDirection: 'column', // Stack content vertically for smaller screens
+        padding: '10px',
+      },
+      contentWrapper: {
+        flexDirection: 'column', // Stack image and text on top of each other
+      },
+      imageContent: {
+        width: '100%', // Full width for smaller screens
+        paddingBottom: '20px',
+      },
+      textContent: {
+        width: '100%', // Full width for smaller screens
+        paddingLeft: '0',
+        textAlign: 'center',
+      },
+      title: {
+        fontSize: '20px',
+      },
+      description: {
+        fontSize: '14px',
+      },
     },
   };
 

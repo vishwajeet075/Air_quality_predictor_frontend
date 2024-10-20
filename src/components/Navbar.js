@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaHome, FaChartLine, FaSearch, FaTv } from 'react-icons/fa'; // Importing FontAwesome icons
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false); // State to manage the navbar open/close
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false); // State for Resources dropdown
+
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen); // Toggle the state
+  };
+
+  const toggleResourcesDropdown = () => {
+    setIsResourcesOpen(!isResourcesOpen); // Toggle the Resources dropdown state
+  };
+
   const styles = {
     navbar: {
       position: 'fixed',   // Navbar is fixed at the top
@@ -35,11 +46,56 @@ const NavBar = () => {
       padding: '8px 15px',
       transition: 'color 0.3s ease, transform 0.3s ease',
     },
-    navLinkHover: {
-      transform: 'scale(1.1)',
-    },
     icon: {
       fontSize: '1.5rem',
+    },
+    mobileMenu: {
+      display: isOpen ? 'block' : 'none',
+      position: 'absolute',
+      top: '100%',
+      left: 0,
+      right: 0,
+      backgroundColor: 'rgba(0, 82, 212, 0.9)', // Darker background for dropdown
+      padding: '10px 0',
+      zIndex: 999,
+    },
+    mobileNavItem: {
+      textAlign: 'center',
+      padding: '10px 0',
+    },
+    togglerButton: {
+      background: 'none',
+      border: 'none',
+      color: '#fff',
+      fontSize: '1.5rem',
+      cursor: 'pointer',
+      marginRight: '20px',
+    },
+    desktopMenu: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
+    hidden: {
+      display: 'none',
+    },
+    resourcesDropdown: {
+      position: 'relative',
+    },
+    dropdownMenu: {
+      position: 'absolute',
+      top: '100%',
+      right: 0,
+      backgroundColor: '#fff',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      display: isResourcesOpen ? 'block' : 'none',
+      zIndex: 1001,
+    },
+    dropdownLink: {
+      color: '#0052D4',
+      padding: '10px 20px',
+      display: 'block',
+      textDecoration: 'none',
+      fontWeight: 'bold',
     },
   };
 
@@ -51,16 +107,16 @@ const NavBar = () => {
       <button
         className="navbar-toggler"
         type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+        onClick={toggleNavbar} // Toggle the navbar on button click
+        aria-expanded={isOpen} // Update aria attribute based on state
+        style={styles.togglerButton}
       >
-        <span className="navbar-toggler-icon"></span>
+        {isOpen ? '✖' : '☰'} {/* Toggle icon: Hamburger or Close */}
       </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
+      
+      {/* Show desktop menu for larger screens */}
+      <div style={window.innerWidth >= 768 ? styles.desktopMenu : styles.hidden}>
+        <ul className="navbar-nav">
           <li className="nav-item" style={styles.navItem}>
             <a className="nav-link" href="/" style={styles.navLink}>
               <FaHome style={styles.icon} /> Home
@@ -81,8 +137,56 @@ const NavBar = () => {
               <FaTv style={styles.icon} /> Monitor
             </a>
           </li>
+
+          {/* Resources section with dropdown */}
+          <li className="nav-item" style={{ ...styles.navItem, ...styles.resourcesDropdown }}>
+            <a className="nav-link" href="#resources" style={styles.navLink} onClick={toggleResourcesDropdown}>
+              Resources
+            </a>
+            {isResourcesOpen && (
+              <div style={styles.dropdownMenu}>
+                <a className="dropdown-link" href="/faq" style={styles.dropdownLink}>
+                  FAQ
+                </a>
+              </div>
+            )}
+          </li>
         </ul>
       </div>
+
+      {/* Show mobile menu when open */}
+      {isOpen && (
+        <div style={styles.mobileMenu}>
+          <ul className="navbar-nav">
+            <li className="nav-item" style={styles.mobileNavItem}>
+              <a className="nav-link" href="/" style={styles.navLink} onClick={toggleNavbar}>
+                <FaHome style={styles.icon} /> Home
+              </a>
+            </li>
+            <li className="nav-item" style={styles.mobileNavItem}>
+              <a className="nav-link" href="/visualize" style={styles.navLink} onClick={toggleNavbar}>
+                <FaChartLine style={styles.icon} /> AQI Data
+              </a>
+            </li>
+            <li className="nav-item" style={styles.mobileNavItem}>
+              <a className="nav-link" href="/predict" style={styles.navLink} onClick={toggleNavbar}>
+                <FaSearch style={styles.icon} /> Predict AQI
+              </a>
+            </li>
+            <li className="nav-item" style={styles.mobileNavItem}>
+              <a className="nav-link" href="/monitor" style={styles.navLink} onClick={toggleNavbar}>
+                <FaTv style={styles.icon} /> Monitor
+              </a>
+            </li>
+            {/* Mobile Resources Dropdown */}
+            <li className="nav-item" style={styles.mobileNavItem}>
+              <a className="nav-link" href="/faq" style={styles.navLink} onClick={toggleNavbar}>
+                Resources: FAQ
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };

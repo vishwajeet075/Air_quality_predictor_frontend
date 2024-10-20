@@ -92,9 +92,8 @@ const UpdatedGraphVisualizer = () => {
   };
 
   return (
-    
     <ThemeProvider theme={theme}>
-       <NavBar />
+      <NavBar />
       <Box
         sx={{
           minHeight: '100vh',
@@ -109,7 +108,7 @@ const UpdatedGraphVisualizer = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          style={{ width: '100%', maxWidth: 1000 }}
+          style={{ width: '100%', maxWidth: '1000px' }}
         >
           <Paper elevation={6} sx={{ overflow: 'hidden' }}>
             <Box sx={{ p: 4 }}>
@@ -117,7 +116,7 @@ const UpdatedGraphVisualizer = () => {
                 Air Quality Graph Visualizer
               </Typography>
               <Grid container spacing={4}>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <FormControl fullWidth variant="outlined">
                     <InputLabel id="graph-type-label">Graph Type</InputLabel>
                     <Select
@@ -137,7 +136,7 @@ const UpdatedGraphVisualizer = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <DatePicker
                     selected={fromDate}
                     onChange={(date) => setFromDate(date)}
@@ -152,7 +151,7 @@ const UpdatedGraphVisualizer = () => {
                     }
                   />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <DatePicker
                     selected={toDate}
                     onChange={(date) => setToDate(date)}
@@ -197,9 +196,8 @@ const UpdatedGraphVisualizer = () => {
           </Paper>
         </motion.div>
       </Box>
-      <AirQualityService /> 
+      <AirQualityService />
     </ThemeProvider>
-    
   );
 };
 

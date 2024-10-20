@@ -5,28 +5,32 @@ import IndoorPollution from './IndoorPollution';
 import OutdoorPollution from './OutdoorPollution';
 import AirQualityDashboard from './AirQualityDashboard';
 import NavBar from './Navbar'; 
+import Aqi from './Aqi';
 
 const Monitor = () => {
   const styles = {
     section: {
-      padding: '80px',
+      padding: '20px',
+      marginTop: '50px',
       textAlign: 'center',
       backgroundColor: '#fff',
     },
     steps: {
       display: 'flex',
+      flexWrap: 'wrap', // Allow wrapping for smaller screens
       justifyContent: 'center',
       gap: '20px',
       marginBottom: '40px',
     },
     stepCard: {
-      width: '200px',
+      flex: '1 1 200px', // Responsive card size
       padding: '20px',
       backgroundColor: '#00a3ff',
       color: '#fff',
       borderRadius: '10px',
       position: 'relative',
       textAlign: 'center',
+      minWidth: '180px', // Minimum width for cards
     },
     stepNumber: {
       position: 'absolute',
@@ -45,18 +49,20 @@ const Monitor = () => {
     },
     monitors: {
       display: 'flex',
+      flexWrap: 'wrap', // Allow wrapping for smaller screens
       justifyContent: 'center',
       gap: '20px',
       marginTop: '30px',
     },
     monitorCard: {
       position: 'relative',
-      width: '400px',
+      flex: '1 1 400px', // Responsive card size
       height: '250px',
       borderRadius: '10px',
       overflow: 'hidden',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
       transition: 'transform 0.3s ease-in-out',
+      minWidth: '350px', // Minimum width for cards
     },
     monitorImage: {
       width: '100%',
@@ -74,12 +80,12 @@ const Monitor = () => {
       boxSizing: 'border-box',
     },
     monitorTitle: {
-      fontSize: '1.8em',
+      fontSize: '1.5em',
       marginBottom: '10px',
       fontWeight: 'bold',
     },
     monitorText: {
-      fontSize: '1em',
+      fontSize: '0.9em',
       lineHeight: '1.5',
     },
     yourSection: {
@@ -96,77 +102,71 @@ const Monitor = () => {
       boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
     },
     newHeader: {
-      fontSize: '24px',
+      fontSize: '1.8em',
       fontWeight: 'bold',
       marginBottom: '20px',
     },
     subheader: {
       display: 'flex',
+      flexWrap: 'wrap', // Allow wrapping for smaller screens
       justifyContent: 'center',
       gap: '20px',
     },
     card: {
-      width: '300px',
+      flex: '1 1 300px', // Responsive card size
       padding: '20px',
       backgroundColor: '#ffffff',
       color: '#333',
       borderRadius: '10px',
       textAlign: 'center',
       boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+      minWidth: '250px', // Minimum width for cards
     },
     cardText: {
-      fontSize: '18px',
+      fontSize: '1em',
       marginBottom: '10px',
       fontWeight: 'normal',
     },
     cardSource: {
-      fontSize: '14px',
+      fontSize: '0.9em',
       color: '#1e90ff',
       textDecoration: 'none',
     },
     sections: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '20px',
-        borderRadius: '15px',
-        backgroundColor: '#fff',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-      },
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px',
+      borderRadius: '15px',
+      backgroundColor: '#fff',
+      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+      marginBottom: '20px',
+      width: '100%', // Full width for sections
+      maxWidth: '1200px', // Max width for large screens
+    },
   };
 
   return (
     <div style={styles.section}>
-         <NavBar style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }} />
+      <NavBar style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }} />
+      
       {/* Your Section */}
       <div style={styles.yourSection}>
         {/* Step Cards */}
         <div style={styles.steps}>
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>1</div>
-            <h5>Know the quality of air you breathe</h5>
-          </div>
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>2</div>
-            <h5>Monitor indoor & outdoor air pollutants</h5>
-          </div>
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>3</div>
-            <h5>Control your air quality with a purifier & mask</h5>
-          </div>
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>4</div>
-            <h5>Stay safe and healthy</h5>
-          </div>
+          {['Know the quality of air you breathe', 'Monitor indoor & outdoor air pollutants', 'Control your air quality with a purifier & mask', 'Stay safe and healthy'].map((text, index) => (
+            <div style={styles.stepCard} key={index}>
+              <div style={styles.stepNumber}>{index + 1}</div>
+              <h5>{text}</h5>
+            </div>
+          ))}
         </div>
 
         {/* Monitor Cards */}
         <div style={styles.monitors}>
           <div style={styles.monitorCard}>
-            <img
-              src={indoor}
-              alt="Indoor Monitors"
-              style={styles.monitorImage}
-            />
+            <img src={indoor} alt="Indoor Monitors" style={styles.monitorImage} />
             <div style={styles.monitorContent}>
               <h2 style={styles.monitorTitle}>Indoor Monitors</h2>
               <p style={styles.monitorText}>
@@ -176,11 +176,7 @@ const Monitor = () => {
           </div>
 
           <div style={styles.monitorCard}>
-            <img
-              src={outdoor}
-              alt="Outdoor Monitors"
-              style={styles.monitorImage}
-            />
+            <img src={outdoor} alt="Outdoor Monitors" style={styles.monitorImage} />
             <div style={styles.monitorContent}>
               <h2 style={styles.monitorTitle}>Outdoor Monitors</h2>
               <p style={styles.monitorText}>
@@ -197,35 +193,43 @@ const Monitor = () => {
           We consume 1 million breaths of air every month without knowing how the air quality affects our bodies, mind, and comfort.
         </h2>
         <div style={styles.subheader}>
-          <div style={styles.card}>
-            <p style={styles.cardText}>
-              92% of the world population is exposed to harmful levels of air pollution.
-            </p>
-            <a href="https://www.who.int/" style={styles.cardSource}>
-              World Health Organization
-            </a>
-          </div>
-          <div style={styles.card}>
-            <p style={styles.cardText}>
-              The indoor air quality we breathe is 2 to 5 times worse than outdoors.
-            </p>
-            <a href="https://www.epa.gov/" style={styles.cardSource}>
-              Environmental Protection Agency
-            </a>            
-          </div>
+          {[
+            {
+              text: '92% of the world population is exposed to harmful levels of air pollution.',
+              source: 'World Health Organization',
+              link: 'https://www.who.int/',
+            },
+            {
+              text: 'The indoor air quality we breathe is 2 to 5 times worse than outdoors.',
+              source: 'Environmental Protection Agency',
+              link: 'https://www.epa.gov/',
+            },
+          ].map(({ text, source, link }, index) => (
+            <div style={styles.card} key={index}>
+              <p style={styles.cardText}>{text}</p>
+              <a href={link} style={styles.cardSource} target="_blank" rel="noopener noreferrer">
+                {source}
+              </a>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Pollution Sections */}
       <div style={styles.sections}>
         <IndoorPollution />
       </div>
 
-      {/* Outdoor Pollution Section */}
       <div style={styles.sections}>
         <OutdoorPollution />
       </div>
 
       <div style={styles.sections}>
         <AirQualityDashboard />
+      </div>
+
+      <div style={styles.sections}>
+        <Aqi />
       </div>
     </div>
   );

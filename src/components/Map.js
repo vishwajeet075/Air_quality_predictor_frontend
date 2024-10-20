@@ -77,6 +77,12 @@ const Map = () => {
     );
   };
 
+  // Scroll to content section function
+  const scrollToContent = () => {
+    const contentSection = document.getElementById('content-section');
+    contentSection.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div id="map" style={{ height: "100vh", width: "100vw", margin: 0, paddingTop: 70, position: 'relative' }}>
       <MapContainer
@@ -95,7 +101,6 @@ const Map = () => {
         {locations.map((location, idx) => (
           <MarkerWithTooltip key={idx} location={location} />
         ))}
-
       </MapContainer>
 
       {/* Information box that appears on hover */}
@@ -119,6 +124,26 @@ const Map = () => {
           <p>{hoveredLocation.aqi <= 50 ? 'Good' : hoveredLocation.aqi <= 100 ? 'Moderate' : 'Unhealthy'}</p>
         </div>
       )}
+
+      {/* Down Arrow to scroll to content */}
+      <div 
+        style={{
+          position: 'absolute',
+          bottom: '30px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          fontSize: '3rem',
+          cursor: 'pointer',
+          zIndex: 2,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: '50%',
+          padding: '10px',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+        }}
+        onClick={scrollToContent}
+      >
+        ⬇️
+      </div>
     </div>
   );
 };

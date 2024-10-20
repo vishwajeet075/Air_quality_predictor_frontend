@@ -12,7 +12,7 @@ export default function AirQualityComponent() {
   const styles = {
     container: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',  // Two-column layout
+      gridTemplateColumns: '1fr 1fr',
       gap: '20px',
       fontFamily: 'Arial, sans-serif',
       width: '90%',
@@ -49,7 +49,7 @@ export default function AirQualityComponent() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '10px auto',  // Center AQI circle
+      margin: '10px auto',
       fontSize: '2em',
       fontWeight: 'bold',
       color: '#43a047',
@@ -58,11 +58,18 @@ export default function AirQualityComponent() {
       display: 'flex',
       justifyContent: 'space-around',
       marginTop: '20px',
+      flexWrap: 'wrap',
+    },
+    healthIcon: {
+      textAlign: 'center',
+      width: '80px',
+      marginBottom: '10px',
     },
     weatherForecast: {
       display: 'flex',
       justifyContent: 'space-between',
       marginTop: '20px',
+      flexWrap: 'wrap',
     },
     weatherCard: {
       textAlign: 'center',
@@ -70,6 +77,21 @@ export default function AirQualityComponent() {
       backgroundColor: '#fff',
       borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+      margin: '5px',
+      flex: '1 1 calc(33.333% - 10px)', // Makes 3 cards per row
+    },
+    '@media (max-width: 768px)': {
+      container: {
+        gridTemplateColumns: '1fr',  // Single-column layout for smaller screens
+      },
+      weatherCard: {
+        flex: '1 1 calc(50% - 10px)', // Makes 2 cards per row on smaller screens
+      },
+    },
+    '@media (max-width: 480px)': {
+      weatherCard: {
+        flex: '1 1 100%', // Single column for the smallest screens
+      },
     },
   };
 
@@ -96,11 +118,11 @@ export default function AirQualityComponent() {
         {/* Health Advice */}
         <h3>Health Advice</h3>
         <div style={styles.healthIcons}>
-          <div><img src={wearMask} alt="Wear Mask" /><p>Wear Mask<br /><small>Not Required</small></p></div>
-          <div><img src={stayIndoor} alt="Stay Indoor" /><p>Stay Indoor<br /><small>Not Required</small></p></div>
-          <div><img src={windowsOpen} alt="Keep Windows Open" /><p>Windows<br /><small>Keep Open</small></p></div>
-          <div><img src={purifier} alt="Use Purifier" /><p>Use Purifier<br /><small>Not Required</small></p></div>
-          <div><img src={familyOutdoor} alt="Family Outdoor" /><p>Family<br /><small>Allow Outdoor</small></p></div>
+          <div style={styles.healthIcon}><img src={wearMask} alt="Wear Mask" /><p>Wear Mask<br /><small>Not Required</small></p></div>
+          <div style={styles.healthIcon}><img src={stayIndoor} alt="Stay Indoor" /><p>Stay Indoor<br /><small>Not Required</small></p></div>
+          <div style={styles.healthIcon}><img src={windowsOpen} alt="Keep Windows Open" /><p>Windows<br /><small>Keep Open</small></p></div>
+          <div style={styles.healthIcon}><img src={purifier} alt="Use Purifier" /><p>Use Purifier<br /><small>Not Required</small></p></div>
+          <div style={styles.healthIcon}><img src={familyOutdoor} alt="Family Outdoor" /><p>Family<br /><small>Allow Outdoor</small></p></div>
         </div>
 
         {/* Weather Forecast */}

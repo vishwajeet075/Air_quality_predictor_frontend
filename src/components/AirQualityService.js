@@ -25,6 +25,7 @@ const AirQualityService = () => {
     services: {
       display: 'flex',
       justifyContent: 'center',
+      flexWrap: 'wrap',  // Ensures responsiveness
       gap: '20px',
       marginTop: '30px',
     },
@@ -35,9 +36,7 @@ const AirQualityService = () => {
       overflow: 'hidden',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
       transition: 'transform 0.3s ease',
-    },
-    serviceCardHover: {
-      transform: 'scale(1.05)',
+      backgroundColor: '#fff',
     },
     serviceCardImg: {
       width: '100%',
@@ -66,6 +65,18 @@ const AirQualityService = () => {
     btnHover: {
       backgroundColor: '#1558b3',
     },
+    // Media queries for responsiveness
+    '@media (max-width: 768px)': {
+      bannerHeading: {
+        fontSize: '2em',
+      },
+      bannerText: {
+        fontSize: '1em',
+      },
+      serviceCard: {
+        width: '100%',  // Full width for small screens
+      },
+    },
   };
 
   return (
@@ -81,7 +92,7 @@ const AirQualityService = () => {
 
       {/* Services Section */}
       <section style={styles.services}>
-        <div style={styles.serviceCard} className="service-card">
+        <div style={styles.serviceCard}>
           <img
             src={monitoring}
             alt="Air quality monitors"
@@ -89,13 +100,13 @@ const AirQualityService = () => {
           />
           <div style={styles.cardContent}>
             <h2 style={styles.cardHeading}>Air quality monitors</h2>
-            <a href="https://www.pranaair.com/in/air-quality-monitor/" style={styles.btn} className="btn">
+            <a href="https://www.pranaair.com/in/air-quality-monitor/" style={styles.btn}>
               Know More
             </a>
           </div>
         </div>
 
-        <div style={styles.serviceCard} className="service-card">
+        <div style={styles.serviceCard}>
           <img
             src={sensors}
             alt="Air quality sensors"
@@ -103,13 +114,13 @@ const AirQualityService = () => {
           />
           <div style={styles.cardContent}>
             <h2 style={styles.cardHeading}>Air quality sensors</h2>
-            <a href="https://www.pranaair.com/in/air-quality-sensor/" style={styles.btn} className="btn">
+            <a href="https://www.pranaair.com/in/air-quality-sensor/" style={styles.btn}>
               Know More
             </a>
           </div>
         </div>
 
-        <div style={styles.serviceCard} className="service-card">
+        <div style={styles.serviceCard}>
           <img
             src={service}
             alt="AQI API service"
@@ -117,7 +128,7 @@ const AirQualityService = () => {
           />
           <div style={styles.cardContent}>
             <h2 style={styles.cardHeading}>AQI API service</h2>
-            <a href="https://www.aqi.in/contact-us" style={styles.btn} className="btn">
+            <a href="https://www.aqi.in/contact-us" style={styles.btn}>
               Know More
             </a>
           </div>

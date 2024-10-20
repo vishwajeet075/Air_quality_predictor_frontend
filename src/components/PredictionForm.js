@@ -73,12 +73,12 @@ const PredictionForm = () => {
     <ThemeProvider theme={theme}>
       <NavBar />
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', bgcolor: '#f0f4f8' }}>
-        <Paper elevation={3} sx={{ p: 4, width: '100%', maxWidth: 600 }}>
+        <Paper elevation={3} sx={{ p: 4, width: '100%', maxWidth: 600, borderRadius: '12px' }}>
           <Typography variant="h4" gutterBottom component="div" sx={{ mb: 4, color: theme.palette.primary.main }}>
             Air Quality Prediction
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               {['year', 'month', 'day', 'hour', 'pm10', 'no2', 'so2', 'co', 'no', 'o3', 'nh3'].map((field) => (
                 <Grid item xs={12} sm={6} key={field}>
                   <Controller
@@ -95,6 +95,7 @@ const PredictionForm = () => {
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ min: 0 }} // Prevent negative numbers
                       />
                     )}
                   />
