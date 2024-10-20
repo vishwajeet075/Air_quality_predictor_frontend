@@ -1,8 +1,9 @@
 import GraphVisualizer from "./components/GraphVisualizer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import PredictionForm from "./components/PredictionForm";
+
 import Monitor from "./components/Monitor";
+import PredictComponent from "./components/PredictComponent";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <GraphVisualizer/>
         } />
         <Route path="/predict" element={
-          <PredictionForm/>
+         <PredictComponent/>
         } />
         <Route path="/monitor" element={
           <Monitor/>
