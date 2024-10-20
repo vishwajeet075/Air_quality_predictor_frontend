@@ -1,7 +1,10 @@
 import React from 'react';
 import { FaHome, FaChartLine, FaSearch, FaTv } from 'react-icons/fa'; // Importing FontAwesome icons
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
+
+  const navigate = useNavigate();
   const styles = {
     navbar: {
       position: 'fixed',   // Navbar is fixed at the top
@@ -62,22 +65,22 @@ const NavBar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" style={styles.navItem}>
-            <a className="nav-link" href="/" style={styles.navLink}>
-              <FaHome style={styles.icon} /> Home
+            <a className="nav-link" onClick={()=>navigate('/visualize')} style={styles.navLink}>
+              <FaHome style={styles.icon} /> visualize
             </a>
           </li>
           <li className="nav-item" style={styles.navItem}>
-            <a className="nav-link" href="/visualize" style={styles.navLink}>
+            <a className="nav-link" onClick={()=>navigate('/')} style={styles.navLink}>
               <FaChartLine style={styles.icon} /> AQI Data
             </a>
           </li>
           <li className="nav-item" style={styles.navItem}>
-            <a className="nav-link" href="/predict" style={styles.navLink}>
+            <a className="nav-link" onClick={()=>navigate('/predict')} style={styles.navLink}>
               <FaSearch style={styles.icon} /> Predict AQI
             </a>
           </li>
           <li className="nav-item" style={styles.navItem}>
-            <a className="nav-link" href="/monitor" style={styles.navLink}>
+            <a className="nav-link" onClick={()=>navigate('/monitor')} style={styles.navLink}>
               <FaTv style={styles.icon} /> Monitor
             </a>
           </li>
