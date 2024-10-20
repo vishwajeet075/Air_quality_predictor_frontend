@@ -3,11 +3,13 @@ import indoor from '../assets/images/indoor.jpg';
 import outdoor from '../assets/images/outdoor.jpg';
 import IndoorPollution from './IndoorPollution';
 import OutdoorPollution from './OutdoorPollution';
+import AirQualityDashboard from './AirQualityDashboard';
+import NavBar from './Navbar'; 
 
 const Monitor = () => {
   const styles = {
     section: {
-      padding: '40px',
+      padding: '80px',
       textAlign: 'center',
       backgroundColor: '#fff',
     },
@@ -134,6 +136,7 @@ const Monitor = () => {
 
   return (
     <div style={styles.section}>
+         <NavBar style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }} />
       {/* Your Section */}
       <div style={styles.yourSection}>
         {/* Step Cards */}
@@ -219,6 +222,10 @@ const Monitor = () => {
       {/* Outdoor Pollution Section */}
       <div style={styles.sections}>
         <OutdoorPollution />
+      </div>
+
+      <div style={styles.sections}>
+        <AirQualityDashboard />
       </div>
     </div>
   );

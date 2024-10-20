@@ -38,7 +38,7 @@ export default function Home() {
       zIndex: 2,
     },
     contentContainer: {
-      padding: '20px',
+      padding: '80px',
       backgroundColor: '#f8f8f8',
       zIndex: 2,
       display: 'flex',
@@ -90,18 +90,16 @@ export default function Home() {
           {/* AQI App Section */}
           <div style={styles.airQualitySection}>
             <AQIApp /> {/* AQIApp component with its responsive styles */}
-          </div>
+          </div>          
 
-          <div style={styles.airQualitySection}>
+        </div>
+        <div style={styles.airQualitySection}>
             <AirQualityService /> {/* AQIApp component with its responsive styles */}
           </div>
 
           <div style={styles.airQualitySection}>
             <Monitor /> {/* AQIApp component with its responsive styles */}
           </div>
-          
-
-        </div>
       </div>
     </>
   );
