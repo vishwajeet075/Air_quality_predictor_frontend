@@ -10,22 +10,27 @@ const IndoorPollution = () => {
   const styles = {
     container: {
       display: 'flex',
+      flexDirection: 'column', // Stack on smaller screens
       justifyContent: 'space-between',
       padding: '20px',
       backgroundColor: '#f5f7fa',
       borderRadius: '15px',
       marginBottom: '40px',
       alignItems: 'center',
+      '@media (min-width: 768px)': {
+        flexDirection: 'row', // Horizontal layout on larger screens
+      },
     },
     imageContainer: {
       position: 'relative',
-      width: '50%', // Set width of image container to 50%
+      width: '100%', // Set width to 100% for responsiveness
+      maxWidth: '400px', // Max width for larger screens
       display: 'flex',
       justifyContent: 'center',
     },
     image: {
       borderRadius: '15px',
-      width: '90%',
+      width: '100%',
       height: 'auto',
     },
     icon: {
@@ -47,16 +52,21 @@ const IndoorPollution = () => {
     so2: { top: '20%', right: '10%' },
     tvoc: { bottom: '10%', right: '10%' },
     textContainer: {
-      width: '50%', // Set width of text container to 50%
+      width: '100%', // Set width to 100% for responsiveness
+      maxWidth: '400px', // Max width for larger screens
       padding: '20px',
+      textAlign: 'center', // Center text on smaller screens
+      '@media (min-width: 768px)': {
+        textAlign: 'left', // Align text to the left on larger screens
+      },
     },
     header: {
-      fontSize: '2.4rem',
+      fontSize: '2rem', // Use rem for scalability
       fontWeight: 'bold',
       marginBottom: '20px',
     },
     description: {
-      fontSize: '1.2rem',
+      fontSize: '1rem', // Use rem for scalability
       color: '#555',
       lineHeight: '1.6',
     },
@@ -88,7 +98,7 @@ const IndoorPollution = () => {
       <div style={styles.textContainer}>
         <h2 style={styles.header}>Protect Your Health From Indoor Pollution</h2>
         <p style={styles.description}>
-          Indoor air quality is more worse than outdoor. Keep an eye on your indoor air quality in real-time. Don't take risk on your health. Understanding the air quality is the first step to protect yourself from pollution.
+          Indoor air quality is often worse than outdoor air quality. Keep an eye on your indoor air quality in real-time. Don't take risks with your health. Understanding air quality is the first step to protecting yourself from pollution.
         </p>
       </div>
     </div>

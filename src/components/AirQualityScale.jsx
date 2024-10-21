@@ -18,63 +18,79 @@ const AirQualityScale = () => {
 
   const styles = {
     container: {
-      textAlign: 'center',
-      margin: '20px auto',
-      padding: '20px',
-      maxWidth: '1200px',
-      backgroundColor: '#f8f8f8',
+      textAlign: 'center', // Light background for a clean look
     },
     heading: {
-      fontSize: '24px',
+      fontSize: '22px',
       fontWeight: 'bold',
+      marginBottom: '15px',
     },
     subHeading: {
-      fontSize: '16px',
-      color: '#777',
+      fontSize: '14px',
+      color: '#555',
       marginBottom: '20px',
     },
     scaleGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(2, 1fr)', // Fixed two columns
-      gap: '20px',
+      gridTemplateColumns: 'repeat(2, 1fr)', // Two columns for larger screens
+      gap: '15px',
+      '@media (max-width: 768px)': {
+        gridTemplateColumns: '1fr', // Single column for smaller screens
+      },
     },
     categoryCard: {
       display: 'flex',
       alignItems: 'center',
       backgroundColor: '#fff',
-      borderRadius: '12px',
-      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-      padding: '20px',
-      borderLeft: `8px solid`, // Border color will change based on AQI category
+      borderRadius: '8px',
+      boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
+      padding: '15px',
+      borderLeft: '6px solid', // Dynamic border color
+      transition: 'transform 0.3s ease',
+      cursor: 'pointer',
     },
     icon: {
-      width: '60px',
-      height: '60px',
-      marginRight: '20px',
+      width: '50px',
+      height: '50px',
+      marginRight: '15px',
     },
     info: {
       textAlign: 'left',
     },
     categoryLabel: {
-      fontSize: '18px',
+      fontSize: '16px',
       fontWeight: 'bold',
+      marginBottom: '5px',
     },
     range: {
-      fontSize: '14px',
+      fontSize: '12px',
       fontWeight: 'bold',
-      color: '#555',
+      color: '#333',
     },
     description: {
-      fontSize: '14px',
-      color: '#555',
-      marginTop: '5px',
+      fontSize: '12px',
+      color: '#666',
+      marginTop: '3px',
+    },
+    '@media (max-width: 768px)': {
+      scaleGrid: {
+        gridTemplateColumns: '1fr', // One column for mobile screens
+      },
+      categoryCard: {
+        flexDirection: 'column',
+        textAlign: 'center',
+        padding: '10px',
+      },
+      icon: {
+        marginBottom: '10px',
+      },
     },
   };
 
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Air Quality Index Scale</h2>
-      <p style={styles.subHeading}>Know about the category of air quality index (AQI) your ambient air falls in and what it implies.</p>
+      <p style={styles.subHeading}>Understand the air quality index (AQI) and what it means for your health.</p>
 
       <div style={styles.scaleGrid}>
         {categories.map((category, index) => (
@@ -92,7 +108,6 @@ const AirQualityScale = () => {
         ))}
       </div>
     </div>
-    
   );
 };
 

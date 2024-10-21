@@ -99,7 +99,7 @@ const GraphVisualizer = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          style={{ width: '100%', maxWidth: 1000 }}
+          style={{ width: '100%', maxWidth: '1000px' }}
         >
           <Paper elevation={6} sx={{ overflow: 'hidden' }}>
             <Box sx={{ p: 4 }}>
