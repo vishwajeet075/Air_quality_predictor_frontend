@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import dayjs from 'dayjs';
+import Navbar from './Navbar';
 
 const theme = createTheme({
   palette: {
@@ -84,6 +85,9 @@ const AQIDashboard = () => {
   const dailyData = predictions.filter((_, index) => index % 24 === 0);
 
   return (
+    <>
+    <Navbar/>
+    <div style={{marginTop:'100px'}}></div>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -168,6 +172,7 @@ const AQIDashboard = () => {
         </Grid>
       </Container>
     </ThemeProvider>
+    </>
   );
 };
 

@@ -19,6 +19,7 @@ import { BarChart } from '@mui/icons-material';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Navbar from './Navbar'
 
 const theme = createTheme({
   // ... (theme configuration remains unchanged)
@@ -83,6 +84,8 @@ const GraphVisualizer = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <ThemeProvider theme={theme}>
       <Box sx={{
         minHeight: '100vh',
@@ -235,6 +238,7 @@ const GraphVisualizer = () => {
         </motion.div>
       </Box>
     </ThemeProvider>
+    </>
   );
 };
 
