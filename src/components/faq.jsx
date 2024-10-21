@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import NavBar from './Navbar';
+import NavBar from './Navbar'; 
 
 const FaqSection = () => {
   const [activePm25, setActivePm25] = useState(false);
   const [activeTemperature, setActiveTemperature] = useState(false);
   const [activeHumidity, setActiveHumidity] = useState(false);
   const [activeNoise, setActiveNoise] = useState(false);
+  const [activeAQI, setActiveAQI] = useState(false); // AQI section state
 
   const [activePm25Index, setActivePm25Index] = useState(null);
   const [activeTemperatureIndex, setActiveTemperatureIndex] = useState(null);
   const [activeHumidityIndex, setActiveHumidityIndex] = useState(null);
   const [activeNoiseIndex, setActiveNoiseIndex] = useState(null);
+  const [activeAQIIndex, setActiveAQIIndex] = useState(null); // AQI question index state
 
   const pm25Faqs = [
     { question: 'What is PM 2.5?', answer: 'Mixture of solid particulate (particle) matter & liquid droplets found in the air.' },
@@ -65,11 +67,25 @@ const FaqSection = () => {
     { question: 'What is the standard NOISE for a healthy life?', answer: '45 decibels is considered to be a permissible noise level for the city.' },
   ];
 
+  const aqiFaqs = [
+    { question: 'What is AQI?', answer: 'AQI stands for Air Quality Index, which is a system used to assess air pollution levels.' },
+    { question: 'What does AQI measure?', answer: 'AQI measures pollutants like PM2.5, PM10, ozone, nitrogen dioxide, sulfur dioxide, and carbon monoxide.' },
+    { question: 'Why is AQI important?', answer: 'AQI helps people understand the quality of air they are breathing and take necessary precautions when pollution levels are high.' },
+    { question: 'How is AQI calculated?', answer: 'AQI is calculated based on the concentrations of pollutants, and each pollutant is given a specific index score.' },
+    { question: 'What is a good AQI range?', answer: 'A good AQI is between 0 and 50, indicating healthy air quality.' },
+    { question: 'What AQI range is considered unhealthy?', answer: 'An AQI between 151 and 200 is considered unhealthy, especially for sensitive groups.' },
+    { question: 'How does AQI affect health?', answer: 'High AQI levels can cause respiratory issues, aggravate asthma, and lead to cardiovascular problems.' },
+    { question: 'How often is AQI updated?', answer: 'AQI is usually updated hourly based on real-time air monitoring data.' },
+    { question: 'What are the common sources of high AQI?', answer: 'High AQI can result from vehicle emissions, industrial activities, wildfires, and dust storms.' },
+    { question: 'Can AQI differ by location?', answer: 'Yes, AQI can vary greatly by region and even within a city, depending on the sources of pollution.' },
+  ];
+
   const togglePm25 = () => {
     setActivePm25(!activePm25);
     setActiveTemperature(false);
     setActiveHumidity(false);
     setActiveNoise(false);
+    setActiveAQI(false);
   };
 
   const toggleTemperature = () => {
@@ -77,6 +93,7 @@ const FaqSection = () => {
     setActivePm25(false);
     setActiveHumidity(false);
     setActiveNoise(false);
+    setActiveAQI(false);
   };
 
   const toggleHumidity = () => {
@@ -84,6 +101,7 @@ const FaqSection = () => {
     setActivePm25(false);
     setActiveTemperature(false);
     setActiveNoise(false);
+    setActiveAQI(false);
   };
 
   const toggleNoise = () => {
@@ -91,6 +109,15 @@ const FaqSection = () => {
     setActivePm25(false);
     setActiveTemperature(false);
     setActiveHumidity(false);
+    setActiveAQI(false);
+  };
+
+  const toggleAQI = () => {
+    setActiveAQI(!activeAQI);
+    setActivePm25(false);
+    setActiveTemperature(false);
+    setActiveHumidity(false);
+    setActiveNoise(false);
   };
 
   const togglePm25Index = (index) => {
@@ -109,161 +136,156 @@ const FaqSection = () => {
     setActiveNoiseIndex(activeNoiseIndex === index ? null : index);
   };
 
+  const toggleAQIIndex = (index) => {
+    setActiveAQIIndex(activeAQIIndex === index ? null : index);
+  };
+
+  const sectionStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100vh',
+    backgroundColor: '#f5f5f5',
+  };
+
+  const containerStyle = {
+    maxWidth: '700px',
+    width: '100%',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+    padding: '20px',
+  };
+
+  const headerStyle = {
+    fontSize: '28px',
+    fontWeight: 'bold',
+    color: '#1e40af',
+    textAlign: 'center',
+    marginBottom: '20px',
+  };
+
+  const faqTitleStyle = {
+    backgroundColor: '#e0f2fe',
+    padding: '10px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  };
+
+  const faqItemStyle = {
+    marginBottom: '10px',
+  };
+
+  const questionStyle = {
+    backgroundColor: '#f0f9ff',
+    padding: '10px',
+    cursor: 'pointer',
+  };
+
+  const answerStyle = {
+    padding: '10px',
+    backgroundColor: '#e5e7eb',
+  };
+
+  const symbolStyle = {
+    marginLeft: 'auto',
+    fontSize: '18px',
+  };
+
   return (
-    
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        
-        <NavBar style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }} />
+    <div style={sectionStyle}>
       
-      <div className="max-w-2xl w-full p-6 bg-white rounded-lg shadow-lg mt-10">
-        
-      <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">" "</h2>
-        
-      <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">" " </h2>
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">Frequently Asked Questions</h2>
+      <NavBar style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }} />
+      <div style={containerStyle}>
+        <h2 style={headerStyle}>Frequently Asked Questions</h2>
 
-        <div className="mb-6 border border-blue-300 rounded-lg overflow-hidden shadow-lg">
-          <div className="bg-blue-100">
-            <h3 className="mb-0">
-              <button
-                className="flex justify-between items-center w-full p-4 text-lg font-medium text-blue-700 hover:text-blue-900 transition duration-200 focus:outline-none"
-                onClick={togglePm25}
-                aria-expanded={activePm25}
-              >
-                PM 2.5 Related Questions
-                <span className={`transition-transform duration-200 ${activePm25 ? 'rotate-180' : ''}`}>▼</span>
-              </button>
-            </h3>
+        {/* PM 2.5 Section */}
+        <div style={faqItemStyle}>
+          <div style={faqTitleStyle} onClick={togglePm25}>
+            <span>PM 2.5 Related Questions</span>
+            <span style={symbolStyle}>{activePm25 ? '-' : '+'}</span>
           </div>
-          {activePm25 && (
-            <div className="space-y-4 bg-white p-4">
-              {pm25Faqs.map((faq, index) => (
-                <div key={index} className="border border-blue-300 rounded-lg">
-                  <div className="bg-blue-50">
-                    <button
-                      className="flex justify-between items-center w-full p-4 text-left text-blue-700 focus:outline-none hover:bg-blue-200 transition"
-                      onClick={() => togglePm25Index(index)}
-                      aria-expanded={activePm25Index === index}
-                    >
-                      {faq.question}
-                      <span className={`transition-transform duration-200 ${activePm25Index === index ? 'rotate-180' : ''}`}>▼</span>
-                    </button>
-                  </div>
-                  {activePm25Index === index && (
-                    <div className="p-4 text-blue-800">{faq.answer}</div>
-                  )}
+          {activePm25 &&
+            pm25Faqs.map((faq, index) => (
+              <div key={index}>
+                <div style={questionStyle} onClick={() => togglePm25Index(index)}>
+                  {faq.question}
                 </div>
-              ))}
-            </div>
-          )}
+                {activePm25Index === index && <div style={answerStyle}>{faq.answer}</div>}
+              </div>
+            ))}
         </div>
 
-        <div className="mb-6 border border-blue-300 rounded-lg overflow-hidden shadow-lg">
-          <div className="bg-blue-100">
-            <h3 className="mb-0">
-              <button
-                className="flex justify-between items-center w-full p-4 text-lg font-medium text-blue-700 hover:text-blue-900 transition duration-200 focus:outline-none"
-                onClick={toggleTemperature}
-                aria-expanded={activeTemperature}
-              >
-                Temperature Related Questions
-                <span className={`transition-transform duration-200 ${activeTemperature ? 'rotate-180' : ''}`}>▼</span>
-              </button>
-            </h3>
+        {/* Temperature Section */}
+        <div style={faqItemStyle}>
+          <div style={faqTitleStyle} onClick={toggleTemperature}>
+            <span>Temperature Related Questions</span>
+            <span style={symbolStyle}>{activeTemperature ? '-' : '+'}</span>
           </div>
-          {activeTemperature && (
-            <div className="space-y-4 bg-white p-4">
-              {temperatureFaqs.map((faq, index) => (
-                <div key={index} className="border border-blue-300 rounded-lg">
-                  <div className="bg-blue-50">
-                    <button
-                      className="flex justify-between items-center w-full p-4 text-left text-blue-700 focus:outline-none hover:bg-blue-200 transition"
-                      onClick={() => toggleTemperatureIndex(index)}
-                      aria-expanded={activeTemperatureIndex === index}
-                    >
-                      {faq.question}
-                      <span className={`transition-transform duration-200 ${activeTemperatureIndex === index ? 'rotate-180' : ''}`}>▼</span>
-                    </button>
-                  </div>
-                  {activeTemperatureIndex === index && (
-                    <div className="p-4 text-blue-800">{faq.answer}</div>
-                  )}
+          {activeTemperature &&
+            temperatureFaqs.map((faq, index) => (
+              <div key={index}>
+                <div style={questionStyle} onClick={() => toggleTemperatureIndex(index)}>
+                  {faq.question}
                 </div>
-              ))}
-            </div>
-          )}
+                {activeTemperatureIndex === index && <div style={answerStyle}>{faq.answer}</div>}
+              </div>
+            ))}
         </div>
 
-        <div className="mb-6 border border-blue-300 rounded-lg overflow-hidden shadow-lg">
-          <div className="bg-blue-100">
-            <h3 className="mb-0">
-              <button
-                className="flex justify-between items-center w-full p-4 text-lg font-medium text-blue-700 hover:text-blue-900 transition duration-200 focus:outline-none"
-                onClick={toggleHumidity}
-                aria-expanded={activeHumidity}
-              >
-                Humidity Related Questions
-                <span className={`transition-transform duration-200 ${activeHumidity ? 'rotate-180' : ''}`}>▼</span>
-              </button>
-            </h3>
+        {/* Humidity Section */}
+        <div style={faqItemStyle}>
+          <div style={faqTitleStyle} onClick={toggleHumidity}>
+            <span>Humidity Related Questions</span>
+            <span style={symbolStyle}>{activeHumidity ? '-' : '+'}</span>
           </div>
-          {activeHumidity && (
-            <div className="space-y-4 bg-white p-4">
-              {humidityFaqs.map((faq, index) => (
-                <div key={index} className="border border-blue-300 rounded-lg">
-                  <div className="bg-blue-50">
-                    <button
-                      className="flex justify-between items-center w-full p-4 text-left text-blue-700 focus:outline-none hover:bg-blue-200 transition"
-                      onClick={() => toggleHumidityIndex(index)}
-                      aria-expanded={activeHumidityIndex === index}
-                    >
-                      {faq.question}
-                      <span className={`transition-transform duration-200 ${activeHumidityIndex === index ? 'rotate-180' : ''}`}>▼</span>
-                    </button>
-                  </div>
-                  {activeHumidityIndex === index && (
-                    <div className="p-4 text-blue-800">{faq.answer}</div>
-                  )}
+          {activeHumidity &&
+            humidityFaqs.map((faq, index) => (
+              <div key={index}>
+                <div style={questionStyle} onClick={() => toggleHumidityIndex(index)}>
+                  {faq.question}
                 </div>
-              ))}
-            </div>
-          )}
+                {activeHumidityIndex === index && <div style={answerStyle}>{faq.answer}</div>}
+              </div>
+            ))}
         </div>
 
-        <div className="mb-6 border border-blue-300 rounded-lg overflow-hidden shadow-lg">
-          <div className="bg-blue-100">
-            <h3 className="mb-0">
-              <button
-                className="flex justify-between items-center w-full p-4 text-lg font-medium text-blue-700 hover:text-blue-900 transition duration-200 focus:outline-none"
-                onClick={toggleNoise}
-                aria-expanded={activeNoise}
-              >
-                Noise Related Questions
-                <span className={`transition-transform duration-200 ${activeNoise ? 'rotate-180' : ''}`}>▼</span>
-              </button>
-            </h3>
+        {/* Noise Section */}
+        <div style={faqItemStyle}>
+          <div style={faqTitleStyle} onClick={toggleNoise}>
+            <span>Noise Related Questions</span>
+            <span style={symbolStyle}>{activeNoise ? '-' : '+'}</span>
           </div>
-          {activeNoise && (
-            <div className="space-y-4 bg-white p-4">
-              {noiseFaqs.map((faq, index) => (
-                <div key={index} className="border border-blue-300 rounded-lg">
-                  <div className="bg-blue-50">
-                    <button
-                      className="flex justify-between items-center w-full p-4 text-left text-blue-700 focus:outline-none hover:bg-blue-200 transition"
-                      onClick={() => toggleNoiseIndex(index)}
-                      aria-expanded={activeNoiseIndex === index}
-                    >
-                      {faq.question}
-                      <span className={`transition-transform duration-200 ${activeNoiseIndex === index ? 'rotate-180' : ''}`}>▼</span>
-                    </button>
-                  </div>
-                  {activeNoiseIndex === index && (
-                    <div className="p-4 text-blue-800">{faq.answer}</div>
-                  )}
+          {activeNoise &&
+            noiseFaqs.map((faq, index) => (
+              <div key={index}>
+                <div style={questionStyle} onClick={() => toggleNoiseIndex(index)}>
+                  {faq.question}
                 </div>
-              ))}
-            </div>
-          )}
+                {activeNoiseIndex === index && <div style={answerStyle}>{faq.answer}</div>}
+              </div>
+            ))}
+        </div>
+
+        {/* AQI Section */}
+        <div style={faqItemStyle}>
+          <div style={faqTitleStyle} onClick={toggleAQI}>
+            <span>AQI Related Questions</span>
+            <span style={symbolStyle}>{activeAQI ? '-' : '+'}</span>
+          </div>
+          {activeAQI &&
+            aqiFaqs.map((faq, index) => (
+              <div key={index}>
+                <div style={questionStyle} onClick={() => toggleAQIIndex(index)}>
+                  {faq.question}
+                </div>
+                {activeAQIIndex === index && <div style={answerStyle}>{faq.answer}</div>}
+              </div>
+            ))}
         </div>
       </div>
     </div>

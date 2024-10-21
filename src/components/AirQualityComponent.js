@@ -5,36 +5,30 @@ import windowsOpen from '../assets/images/Openings.png';
 import purifier from '../assets/images/purifier.png';
 import familyOutdoor from '../assets/images/family.png';
 
-// Import the new RankingsComponent
-import RankingsComponent from './RankingsComponent';
-
 export default function AirQualityComponent() {
   const styles = {
     container: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '20px',
-      fontFamily: 'Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
       width: '90%',
+      maxWidth: '800px',
       margin: '20px auto',
+      fontFamily: 'Arial, sans-serif',
     },
-    leftPanel: {
+    panel: {
       backgroundColor: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    },
-    rightPanel: {
-      backgroundColor: '#f9f9f9',
-      padding: '20px',
-      borderRadius: '8px',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+      width: '100%',
     },
     header: {
       fontWeight: 'bold',
       fontSize: '1.5em',
       marginBottom: '10px',
-      textAlign: 'center',
     },
     subHeader: {
       fontSize: '1.2em',
@@ -49,7 +43,7 @@ export default function AirQualityComponent() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '10px auto',
+      margin: '20px auto',
       fontSize: '2em',
       fontWeight: 'bold',
       color: '#43a047',
@@ -81,36 +75,27 @@ export default function AirQualityComponent() {
       flex: '1 1 calc(33.333% - 10px)', // Makes 3 cards per row
     },
     '@media (max-width: 768px)': {
-      container: {
-        gridTemplateColumns: '1fr',  // Single-column layout for smaller screens
-      },
       weatherCard: {
         flex: '1 1 calc(50% - 10px)', // Makes 2 cards per row on smaller screens
       },
     },
     '@media (max-width: 480px)': {
       weatherCard: {
-        flex: '1 1 100%', // Single column for the smallest screens
+        flex: '1 1 100%', // Single column for smallest screens
       },
     },
   };
 
   return (
     <div style={styles.container}>
-      {/* Left Panel - Dynamic Ranking (using RankingsComponent) */}
-      <div style={styles.leftPanel}>
-        <RankingsComponent />
-      </div>
-
-      {/* Right Panel - AQI Info */}
-      <div style={styles.rightPanel}>
+      <div style={styles.panel}>
         <div style={styles.header}>
           Hinjewadi Infotech Park Real-time Air Quality Index (AQI) <span style={styles.subHeader}>Live</span>
         </div>
         <p>Current air pollution level and weather condition of your location with the aggregate levels of major air pollutants in the ambient air.</p>
         <div style={styles.aqiCircle}>43</div>
-        <div style={{ textAlign: 'center' }}><strong>GOOD</strong></div>
-        <div style={{ textAlign: 'center', margin: '10px 0' }}>
+        <div><strong>GOOD</strong></div>
+        <div style={{ margin: '10px 0' }}>
           <div style={{ fontSize: '2em' }}>26°C</div>
           <div>Mist<br /><small>Local Time: 12:38 | 2024-10-19</small></div>
         </div>
