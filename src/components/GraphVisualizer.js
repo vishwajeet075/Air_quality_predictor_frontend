@@ -86,6 +86,7 @@ const GraphVisualizer = () => {
   return (
     <>
     <Navbar/>
+    <div style={{marginTop:'100px'}}></div>
     <ThemeProvider theme={theme}>
       <Box sx={{
         minHeight: '100vh',
