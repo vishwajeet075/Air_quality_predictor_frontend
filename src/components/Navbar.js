@@ -142,7 +142,7 @@ const NavBar = () => {
           </li>
           <li className="nav-item" style={styles.navItem}>
             <button className="nav-link" onClick={()=>navigate('/faq')} style={styles.navLink}>
-              <FaTv style={styles.icon} />
+              <FaTv style={styles.icon} />FAQ
             </button>
           </li>
 
@@ -167,14 +167,14 @@ const NavBar = () => {
         <div style={styles.mobileMenu}>
           <ul className="navbar-nav">
             <li className="nav-item" style={styles.mobileNavItem}>
-              <a className="nav-link" href="/" style={styles.navLink} onClick={toggleNavbar}>
+              <button className="nav-link" href="/" style={styles.navLink} onClick={toggleNavbar}>
                 <FaHome style={styles.icon} /> Home
-              </a>
+              </button>
             </li>
             <li className="nav-item" style={styles.mobileNavItem}>
-              <a className="nav-link" href="/visualize" style={styles.navLink} onClick={toggleNavbar}>
+              <button className="nav-link" href="/visualize" style={styles.navLink} onClick={toggleNavbar}>
                 <FaChartLine style={styles.icon} /> AQI Data
-              </a>
+              </button>
             </li>
             <li className="nav-item" style={styles.mobileNavItem}>
               <a className="nav-link" href="/predict" style={styles.navLink} onClick={toggleNavbar}>
