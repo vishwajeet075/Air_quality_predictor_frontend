@@ -84,6 +84,11 @@ const NavBar = () => {
               <FaTv style={styles.icon} /> Monitor
             </button>
           </li>
+          <li className="nav-item" style={styles.navItem}>
+            <button className="nav-link" onClick={()=>navigate('/faq')} style={styles.navLink}>
+              <FaTv style={styles.icon} />
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
