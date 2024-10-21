@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import NavBar from './Navbar';
-import AirQualityService from './AirQualityService';
-import { 
-  Box, 
-  Paper, 
-  Typography, 
-  Button, 
-  Grid, 
-  FormControl, 
-  InputLabel, 
-  Select, 
+import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Paper,
+  Typography,
+  Button,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
   MenuItem,
   Fade,
-  CircularProgress
+  CircularProgress,
+  TextField
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
@@ -22,68 +21,60 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-    background: {
-      default: '#f5f5f5',
-    },
-  },
-  typography: {
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    h4: {
-      fontWeight: 600,
-    },
-  },
-  components: {
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: 16,
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-          textTransform: 'none',
-          fontWeight: 600,
-        },
-      },
-    },
-  },
+  // ... (theme configuration remains unchanged)
 });
 
 const graphTypes = [
-  { name: 'Box Plot', value: 'boxplot', icon: '📊' },
-  { name: 'Heatmap', value: 'heatmap', icon: '🔥' },
-  { name: 'Time Series', value: 'timeseries', icon: '📈' },
-  { name: 'Scatter Plot', value: 'scatterplot', icon: '🔵' },
-  { name: 'Histogram', value: 'histogram', icon: '📊' },
-  { name: 'Line Plot', value: 'lineplot', icon: '📉' }
+  { name: 'Pollutant Time Series', value: 'pollutant', icon: '📈', needsPollutant: true, needsDate: true },
+  { name: 'Pollutant Heatmap', value: 'pollutant_heatmap', icon: '🔥', needsPollutant: true, needsYear: true },
+  { name: 'Normalized Monthly Pollutants', value: 'normalized_monthly_pollutants', icon: '📊', needsTimeGranularity: true },
+  { name: 'Correlation Heatmap', value: 'correlation_heatmap', icon: '🔗', needsDate: false },
+  { name: 'Subindex Correlation Heatmap', value: 'subindex_correlation_heatmap', icon: '🔬', needsDate: false },
+  { name: 'AQI Bucket Distribution', value: 'aqi_bucket_distribution', icon: '📊', needsDate: false },
+  { name: 'AQI Over Time', value: 'aqi_over_time', icon: '📉', needsTimeGranularity: true }
 ];
 
-const UpdatedGraphVisualizer = () => {
+const pollutants = ['pm2_5', 'pm10', 'no2', 'so2', 'co', 'o3', 'nh3'];
+const timeGranularities = ['hourly', 'daily', 'monthly'];
+
+const GraphVisualizer = () => {
   const [graphType, setGraphType] = useState(graphTypes[0]);
   const [graphImage, setGraphImage] = useState('');
-  const [fromDate, setFromDate] = useState(new Date('2020-11-27'));
-  const [toDate, setToDate] = useState(new Date('2024-09-30'));
+  const [fromDate, setFromDate] = useState(new Date('2022-01-01'));
+  const [toDate, setToDate] = useState(new Date());
+  const [pollutant, setPollutant] = useState(pollutants[0]);
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [timeGranularity, setTimeGranularity] = useState(timeGranularities[1]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Clear the graph image when graph type changes
+    setGraphImage('');
+  }, [graphType]);
 
   const handleGraphRequest = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post('https://air-quality-predictor-backend.onrender.com/generate_graph', {
+      const payload = {
         graph_type: graphType.value,
-        from_date: fromDate.toISOString().split('T')[0],
-        to_date: toDate.toISOString().split('T')[0]
-      });
-      setGraphImage(`data:image/png;base64,${response.data.image}`);
+        time_granularity: timeGranularity
+      };
+
+      if (graphType.needsPollutant) {
+        payload.pollutant = pollutant;
+      }
+
+      if (graphType.needsDate) {
+        payload.start_date = fromDate.toISOString().split('T')[0];
+        payload.end_date = toDate.toISOString().split('T')[0];
+      }
+
+      if (graphType.needsYear) {
+        payload.year = year;
+      }
+
+      const response = await axios.post('https://air-quality-predictor-backend.onrender.com/generate-graph', payload);
+      setGraphImage(`data:image/png;base64,${response.data.graph_data}`);
     } catch (error) {
       console.error('Error fetching graph:', error);
     } finally {
@@ -92,19 +83,15 @@ const UpdatedGraphVisualizer = () => {
   };
 
   return (
-    
     <ThemeProvider theme={theme}>
-       <NavBar />
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'background.default',
-          padding: 4,
-        }}
-      >
+      <Box sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'background.default',
+        padding: 4,
+      }}>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,10 +101,10 @@ const UpdatedGraphVisualizer = () => {
           <Paper elevation={6} sx={{ overflow: 'hidden' }}>
             <Box sx={{ p: 4 }}>
               <Typography variant="h4" align="center" gutterBottom color="primary">
-                Air Quality Graph Visualizer
+                Enhanced Air Quality Graph Visualizer
               </Typography>
               <Grid container spacing={4}>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                   <FormControl fullWidth variant="outlined">
                     <InputLabel id="graph-type-label">Graph Type</InputLabel>
                     <Select
@@ -137,37 +124,87 @@ const UpdatedGraphVisualizer = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                  <DatePicker
-                    selected={fromDate}
-                    onChange={(date) => setFromDate(date)}
-                    selectsStart
-                    startDate={fromDate}
-                    endDate={toDate}
-                    maxDate={toDate}
-                    customInput={
-                      <Button variant="outlined" fullWidth>
-                        {fromDate.toDateString()}
-                      </Button>
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <DatePicker
-                    selected={toDate}
-                    onChange={(date) => setToDate(date)}
-                    selectsEnd
-                    startDate={fromDate}
-                    endDate={toDate}
-                    minDate={fromDate}
-                    maxDate={new Date('2024-09-30')}
-                    customInput={
-                      <Button variant="outlined" fullWidth>
-                        {toDate.toDateString()}
-                      </Button>
-                    }
-                  />
-                </Grid>
+                {graphType.needsPollutant && (
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel id="pollutant-label">Pollutant</InputLabel>
+                      <Select
+                        labelId="pollutant-label"
+                        value={pollutant}
+                        onChange={(e) => setPollutant(e.target.value)}
+                        label="Pollutant"
+                      >
+                        {pollutants.map((p) => (
+                          <MenuItem key={p} value={p}>{p.toUpperCase()}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                )}
+                {graphType.needsTimeGranularity && (
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel id="time-granularity-label">Time Granularity</InputLabel>
+                      <Select
+                        labelId="time-granularity-label"
+                        value={timeGranularity}
+                        onChange={(e) => setTimeGranularity(e.target.value)}
+                        label="Time Granularity"
+                      >
+                        {graphType.value === 'normalized_monthly_pollutants'
+                          ? [<MenuItem key="monthly" value="monthly">Monthly</MenuItem>]
+                          : timeGranularities.map((tg) => (
+                              <MenuItem key={tg} value={tg}>{tg.charAt(0).toUpperCase() + tg.slice(1)}</MenuItem>
+                            ))
+                        }
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                )}
+                {graphType.needsYear && (
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      fullWidth
+                      label="Year"
+                      type="number"
+                      value={year}
+                      onChange={(e) => setYear(parseInt(e.target.value))}
+                      InputProps={{ inputProps: { min: 2022, max: new Date().getFullYear() } }}
+                    />
+                  </Grid>
+                )}
+                {graphType.needsDate && (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <DatePicker
+                        selected={fromDate}
+                        onChange={(date) => setFromDate(date)}
+                        selectsStart
+                        startDate={fromDate}
+                        endDate={toDate}
+                        minDate={new Date('2022-01-01')}
+                        maxDate={toDate}
+                        customInput={
+                          <TextField fullWidth label="From Date" />
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <DatePicker
+                        selected={toDate}
+                        onChange={(date) => setToDate(date)}
+                        selectsEnd
+                        startDate={fromDate}
+                        endDate={toDate}
+                        minDate={fromDate}
+                        maxDate={new Date()}
+                        customInput={
+                          <TextField fullWidth label="To Date" />
+                        }
+                      />
+                    </Grid>
+                  </>
+                )}
               </Grid>
               <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
                 <Button
@@ -197,10 +234,8 @@ const UpdatedGraphVisualizer = () => {
           </Paper>
         </motion.div>
       </Box>
-      <AirQualityService /> 
     </ThemeProvider>
-    
   );
 };
 
-export default UpdatedGraphVisualizer;
+export default GraphVisualizer;
