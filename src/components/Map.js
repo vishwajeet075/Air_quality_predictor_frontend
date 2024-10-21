@@ -21,13 +21,13 @@ const Map = () => {
   ];
 
   const locations = [
-    { lat: 18.5204, lng: 73.8567, name: "Pune City", aqi: 55 },
+    { lat: 18.5204, lng: 73.8567, name: "Pune City", aqi: 88 },
     { lat: 18.6298, lng: 73.7997, name: "Pimpri-Chinchwad", aqi: 72 },
     { lat: 18.5867, lng: 73.8065, name: "Kasarwadi", aqi: 68 },
-    { lat: 18.5635, lng: 73.8407, name: "Khadki", aqi: 50 },
+    { lat: 18.5635, lng: 73.8407, name: "Khadki", aqi: 76 },
     { lat: 18.4967, lng: 73.8419, name: "Shivajinagar", aqi: 60 },
     { lat: 18.4635, lng: 73.8656, name: "Katraj", aqi: 75 },
-    { lat: 18.5203, lng: 73.8792, name: "Viman Nagar", aqi: 49 },
+    { lat: 18.5203, lng: 73.8792, name: "Viman Nagar", aqi: 74 },
     { lat: 18.5284, lng: 73.8742, name: "Yerwada", aqi: 80 },
     { lat: 18.5303, lng: 73.8399, name: "Koregaon Park", aqi: 58 },
     { lat: 18.5215, lng: 73.8422, name: "Mahatma Gandhi Road", aqi: 65 },
@@ -36,7 +36,7 @@ const Map = () => {
     { lat: 18.5312, lng: 73.8447, name: "Bund Garden", aqi: 69 },
     { lat: 18.5485, lng: 73.9029, name: "Wagholi", aqi: 80 },
     { lat: 18.5687, lng: 73.7725, name: "Hinjawadi", aqi: 77 },
-    { lat: 18.5824, lng: 73.7374, name: "Chinchwad", aqi: 55 },
+    { lat: 18.5824, lng: 73.7374, name: "Chinchwad", aqi: 63 },
     { lat: 18.6090, lng: 73.8039, name: "Bhosari", aqi: 62 },
     { lat: 18.5738, lng: 73.8779, name: "Kharadi", aqi: 67 },
     { lat: 18.5316, lng: 73.9101, name: "Mundhwa", aqi: 74 }
@@ -127,23 +127,26 @@ const Map = () => {
 
       {/* Down Arrow to scroll to content */}
       <div 
-        style={{
-          position: 'absolute',
-          bottom: '30px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontSize: '3rem',
-          cursor: 'pointer',
-          zIndex: 2,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          borderRadius: '50%',
-          padding: '10px',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-        }}
-        onClick={scrollToContent}
-      >
-        ⬇️
-      </div>
+  style={{
+    position: 'absolute',
+    bottom: '40px', // Adjusted for better visibility on smaller screens
+    left: '90%',
+    transform: 'translateX(-50%)',
+    fontSize: '3rem', // Larger for better clarity
+    cursor: 'pointer',
+    zIndex: 1000, // Darker background for contrast
+    color: 'white', // White arrow for visibility
+    borderRadius: '50%',
+    padding: '15px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+    transition: 'transform 0.3s ease', // Add animation effect
+  }}
+  onClick={scrollToContent}
+  onMouseOver={(e) => e.target.style.transform = 'translateX(-50%) scale(1.1)'}
+  onMouseOut={(e) => e.target.style.transform = 'translateX(-50%) scale(1)'}
+>
+  ⬇️
+</div>
     </div>
   );
 };
