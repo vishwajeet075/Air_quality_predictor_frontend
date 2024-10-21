@@ -3,7 +3,6 @@ import NavBar from './Navbar';
 import Map from './Map';
 import AirQualityScale from './AirQualityScale';
 import AirQualityComponent from './AirQualityComponent';
-import AQIComponent from './AQIComponent';
 import AQIApp from './AQIApp';
 import AirQualityService from './AirQualityService';
 import Monitor from './Monitor';
@@ -58,9 +57,7 @@ const Home = () => {
           <Map />
         </div>
         <div id="content-section" style={styles.contentContainer}>
-          <div style={styles.airQualitySection}>
-            <AQIComponent />
-          </div>
+
           <div style={styles.airQualitySection}>
             <AirQualityScale />
           </div>
